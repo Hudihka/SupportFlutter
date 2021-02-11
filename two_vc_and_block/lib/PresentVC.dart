@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 
-
 class PresentVC extends StatefulWidget {
   PresentVC({Key key, this.title}) : super(key: key);
   final String title;
@@ -9,20 +8,20 @@ class PresentVC extends StatefulWidget {
 }
 
 class _PresentVCState extends State<PresentVC> {
-
-    @override
+  @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(
-        title: Text('Present VC'),
-      ),
-      floatingActionButton: FloatingActionButton(
-        onPressed: () {
+        appBar: AppBar(
+          title: Text('Present VC'),
+        ),
+        floatingActionButton: FloatingActionButton(
+          onPressed: () {
             //нажали отнять
-        },
-        tooltip: 'Increment',
-        child: Icon(Icons.delete,
-      ),
-    );
+          },
+          tooltip: 'Increment',
+          child: Icon(
+            Icons.delete,
+          ),
+        ));
   }
 }
