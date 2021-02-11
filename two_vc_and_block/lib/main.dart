@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:two_vc_and_block/PushVC.dart';
+import 'package:two_vc_and_block/StartVC.dart';
 
 void main() {
   runApp(MyApp());
@@ -9,67 +11,18 @@ class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
-      title: 'Flutter Demo',
+      //переход можно задавать еще так
+      //но тогда закоменти home
+      // initialRoute: '/',
+      // routes: {
+      //     '/':(BuildContext context) => StartVC(),
+      //     '/second':(BuildContext context) => PushVC()
+      // },
       theme: ThemeData(
         primarySwatch: Colors.blue,
         visualDensity: VisualDensity.adaptivePlatformDensity,
       ),
-      home: MyHomePage(title: 'Two VC and Block'),
-    );
-  }
-}
-
-class MyHomePage extends StatefulWidget {
-  MyHomePage({Key key, this.title}) : super(key: key);
-  final String title;
-  @override
-  _MyHomePageState createState() => _MyHomePageState();
-}
-
-class _MyHomePageState extends State<MyHomePage> {
-  int _counter = 0;
-
-
-  @override
-  Widget build(BuildContext context) {
-    return Scaffold(
-      appBar: AppBar(
-        title: Text(widget.title),
-      ),
-      body: Center(
-        child: Column(
-          mainAxisAlignment: MainAxisAlignment.center,
-          children: <Widget>[
-
-
-            Row(
-              mainAxisAlignment: MainAxisAlignment.spaceEvenly,//весь контент разделен одинак расстоянием
-              children: <Widget>[
-              FlatButton(onPressed: (){
-
-              }, 
-              textColor: Colors.red, 
-              color: Colors.blue,
-              child: Text("++",)),
-              Text('Пуш ВК и ++ к счетчику')
-            ]),
-            SizedBox(height: 100,),
-            Row(
-              mainAxisAlignment: MainAxisAlignment.center, //весь контент собран по центру
-              children: <Widget>[
-              FlatButton(onPressed: (){
-
-              },
-              minWidth: 50, //ширина кнопки
-              height: 50, //высота кнопки
-              color: Colors.blue, 
-              textColor: Colors.red, 
-              child: Text("--",)),
-              Text('Пресент ВК и -- к счетчику')
-            ]),
-          ],
-        ),
-      ),
+      home: StartVC(title: 'Two VC and Block',),
     );
   }
 }
