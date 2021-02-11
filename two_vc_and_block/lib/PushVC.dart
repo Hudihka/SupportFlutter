@@ -45,39 +45,47 @@ class _PushVCState extends State<PushVC> {
     );
   }
 
-    GestureDetector _customButtonBackText({String text}) {
+  GestureDetector _customButtonBackText({String text}) {
     return GestureDetector(
       onTap: () {
         Navigator.pop(context);
       },
       child: Row(children: [
         SizedBox(width: 18),
-        SizedBox(width: 18, child: Icon(Icons.arrow_back_ios),),
-        Text(text == null ? 'Назад' : text, style: TextStyle(fontSize: 18),)
+        SizedBox(
+          width: 16,
+          child: Icon(Icons.arrow_back_ios),
+        ),
+        SizedBox(
+          width: 58,
+          child: Center(
+            child: Text(text == null ? 'Назад' : text,
+                style: TextStyle(fontSize: 19)),
+          ),
+        )
       ]),
     );
   }
 
   // Icon(Icons.arrow_back_ios)
 
-  List<Widget> _rightButtons(){
+  List<Widget> _rightButtons() {
     return <Widget>[
-          Padding(
-              padding: EdgeInsets.only(right: 20.0),
-              child: GestureDetector(
-                onTap: () {},
-                child: Icon(
-                  Icons.search,
-                  size: 26.0,
-                ),
-              )),
-          Padding(
-              padding: EdgeInsets.only(right: 20.0),
-              child: GestureDetector(
-                onTap: () {},
-                child: Icon(Icons.more_vert),
-              )),
-        ];
+      Padding(
+          padding: EdgeInsets.only(right: 20.0),
+          child: GestureDetector(
+            onTap: () {},
+            child: Icon(
+              Icons.search,
+              size: 26.0,
+            ),
+          )),
+      Padding(
+          padding: EdgeInsets.only(right: 20.0),
+          child: GestureDetector(
+            onTap: () {},
+            child: Icon(Icons.more_vert),
+          )),
+    ];
   }
-
 }
