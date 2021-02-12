@@ -68,14 +68,13 @@ class _StartVCState extends State<StartVC> {
   FlatButton _presentVC() {
     return FlatButton(
       onPressed: () {
-        //presentVC
-        // Navigator.of(context).push(
-        //   CupertinoPageRoute(
-        //       fullscreenDialog: true,
-        //       builder: (context) => PresentVC(),
-        //       settings: RouteSettings()),
-        // );
-        _tripEditModalBottomSheet(context);
+        // presentVC
+        Navigator.of(context).push(
+          CupertinoPageRoute(
+              fullscreenDialog: true,
+              builder: (context) => PresentVC(),
+              settings: RouteSettings()),
+        );
       },
       minWidth: 50, //ширина кнопки
       height: 50, //высота кнопки
@@ -87,6 +86,8 @@ class _StartVCState extends State<StartVC> {
     );
   }
 
+//ШТОРКА
+/*
     void _tripEditModalBottomSheet(context) {
     showModalBottomSheet(context: context, builder: (BuildContext bc) {
       return Container(
@@ -124,7 +125,7 @@ class _StartVCState extends State<StartVC> {
   }
 
 
-
+*/
 
 
 
