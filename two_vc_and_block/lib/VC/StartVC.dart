@@ -1,7 +1,9 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:two_vc_and_block/VC/PushVC.dart';
 import 'package:two_vc_and_block/VC/PresentVC.dart';
+import 'package:two_vc_and_block/bloc.dart';
 
 class StartVC extends StatefulWidget {
   StartVC({Key key, this.title}) : super(key: key);
@@ -15,7 +17,10 @@ class _StartVCState extends State<StartVC> {
 
   @override
   Widget build(BuildContext context) {
-    return _startScafold();
+    return BlocProvider<UserBlock>(
+      create: (context) => UserBlock(StateEnum.stateNone),
+      child: _startScafold(),
+    );
   }
 
 
