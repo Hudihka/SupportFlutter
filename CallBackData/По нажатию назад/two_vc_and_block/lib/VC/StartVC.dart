@@ -1,7 +1,7 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:two_vc_and_block/PushVC.dart';
-import 'package:two_vc_and_block/PresentVC.dart';
+import 'package:two_vc_and_block/VC/PushVC.dart';
+import 'package:two_vc_and_block/VC/PresentVC.dart';
 
 class StartVC extends StatefulWidget {
   StartVC({Key key, this.title}) : super(key: key);

@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:two_vc_and_block/PushVC.dart';
-import 'package:two_vc_and_block/StartVC.dart';
+import 'package:two_vc_and_block/VC/PushVC.dart';
+import 'package:two_vc_and_block/VC/StartVC.dart';
 
 void main() {
   runApp(MyApp());
