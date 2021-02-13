@@ -15,6 +15,12 @@ class _StartVCState extends State<StartVC> {
 
   @override
   Widget build(BuildContext context) {
+    return _startScafold();
+  }
+
+
+  //собств сам стартовый вк
+  Scaffold _startScafold(){
     return Scaffold(
       appBar: AppBar(
         title: Text(widget.title),
@@ -46,6 +52,9 @@ class _StartVCState extends State<StartVC> {
       ),
     );
   }
+
+
+
 
   FlatButton _pushVC() {
     return FlatButton(
