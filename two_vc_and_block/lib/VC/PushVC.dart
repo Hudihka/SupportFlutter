@@ -4,19 +4,22 @@ import 'package:two_vc_and_block/bloc.dart';
 
 
 
-class PushVC extends StatefulWidget {
-  PushVC({Key key, this.title}) : super(key: key);
-  final String title;
-  @override
-  _PushVCState createState() => _PushVCState();
-}
+// class PushVC extends StatefulWidget {
+//   PushVC({Key key, this.title}) : super(key: key);
+//   final String title;
+//   @override
+//   _PushVCState createState() => _PushVCState();
+// }
 
-class _PushVCState extends State<PushVC> {
+// class _PushVCState extends State<PushVC> {
+
+class PushVC extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
 
-    final UserBlock userBlock = BlocProvider.of<UserBlock>(context);
+    // final UserBlock userBlock = BlocProvider.of<UserBlock>(context);
+    final UserBlock userBlock = BlocProvider.of(context);
 
     return Scaffold(
       appBar: AppBar(
