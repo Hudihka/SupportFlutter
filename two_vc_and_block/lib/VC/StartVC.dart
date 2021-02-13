@@ -13,7 +13,7 @@ class StartVC extends StatefulWidget {
 }
 
 class _StartVCState extends State<StartVC> {
-  int _counter = 0;
+  CounterTextWidget _counterText;
 
   @override
   Widget build(BuildContext context) {
@@ -34,10 +34,7 @@ class _StartVCState extends State<StartVC> {
         child: Column(
           mainAxisAlignment: MainAxisAlignment.center,
           children: <Widget>[
-            Text(
-              'Counter count ${_counter}',
-              style: TextStyle(fontSize: 25, color: Colors.red),
-            ),
+            _counterText,
             Row(
                 mainAxisAlignment: MainAxisAlignment
                     .spaceEvenly, //весь контент разделен одинак расстоянием
@@ -98,4 +95,41 @@ class _StartVCState extends State<StartVC> {
   }
 
 
+}
+
+class CounterTextWidget extends StatelessWidget {
+
+  int _counter = 0;
+
+  @override
+  Widget build(BuildContext context) {
+    return BlocBuilder<UserBlock, StateEnum>(builder: (context, state) {
+      if (state == StateEnum.stateAdd){
+        _counter++;
+        return Text(
+              'Counter count $_counter',
+              style: TextStyle(fontSize: 25, color: Colors.red),
+            );
+      } 
+      
+      if (state == StateEnum.stateMinus){
+
+        if (_counter > 0) {
+          _counter--;
+        }
+
+        return Text(
+              'Counter count $_counter',
+              style: TextStyle(fontSize: 25, color: Colors.red),
+            );
+      }
+
+      return Text(
+              'Counter count $_counter',
+              style: TextStyle(fontSize: 25, color: Colors.red),
+            );
+
+
+    });
+  }
 }
