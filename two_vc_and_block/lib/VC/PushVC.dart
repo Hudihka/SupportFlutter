@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
-//Navigator.pop(context) //возвращаемся назад
-// Navigator.pop(context, 'Yep!'); //возвращаемся назад передавая данные
+import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:two_vc_and_block/bloc.dart';
+
+
 
 class PushVC extends StatefulWidget {
   PushVC({Key key, this.title}) : super(key: key);
@@ -10,8 +12,12 @@ class PushVC extends StatefulWidget {
 }
 
 class _PushVCState extends State<PushVC> {
+
   @override
   Widget build(BuildContext context) {
+
+    final UserBlock userBlock = BlocProvider.of<UserBlock>(context);
+
     return Scaffold(
       appBar: AppBar(
         title: Text('Push VC'),
@@ -23,7 +29,7 @@ class _PushVCState extends State<PushVC> {
       ),
       floatingActionButton: FloatingActionButton(
         onPressed: () {
-          //нажали добавить
+          userBlock.add(Events.pressAdd);
         },
         tooltip: 'Increment',
         child: Icon(Icons.add),

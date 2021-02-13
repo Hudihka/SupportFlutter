@@ -38,25 +38,25 @@ enum Events{
   pressMinus
 }
 
-enum State{
+enum StateEnum{
   stateAdd,
   stateMinus,
   stateNone
 }
 
-class UserBlock extends Bloc<Events, State> {
-  UserBlock(State initialState) : super(initialState);
+class UserBlock extends Bloc<Events, StateEnum> {
+  UserBlock(StateEnum initialState) : super(initialState);
 
 
   @override
-  Stream<State> mapEventToState(Events event) async* {//async* работа с потоком
+  Stream<StateEnum> mapEventToState(Events event) async* {//async* работа с потоком
 
     if (event == Events.pressAdd){
-      yield State.stateAdd;
+      yield StateEnum.stateAdd;
     } else if (event == Events.pressMinus){
-      yield State.stateMinus;
+      yield StateEnum.stateMinus;
     } else {
-      yield State.stateNone;
+      yield StateEnum.stateNone;
     }
 
   }
