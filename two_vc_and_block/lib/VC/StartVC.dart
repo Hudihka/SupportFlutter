@@ -13,7 +13,7 @@ class StartVC extends StatefulWidget {
 }
 
 class _StartVCState extends State<StartVC> {
-  CounterTextWidget _counterText;
+  CounterTextWidget _counterText = CounterTextWidget();
 
   @override
   Widget build(BuildContext context) {
