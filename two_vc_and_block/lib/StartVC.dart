@@ -54,9 +54,6 @@ class _StartVCState extends State<StartVC> {
             context,
             MaterialPageRoute(builder: (context) => PushVC()),
           );
-
-          ///или смотри в matelialApp
-          // Navigator.pushNamed(context, '/second');
         },
         textColor: Colors.red,
         color: Colors.blue,
@@ -86,90 +83,5 @@ class _StartVCState extends State<StartVC> {
     );
   }
 
-//ШТОРКА
-/*
-    void _tripEditModalBottomSheet(context) {
-    showModalBottomSheet(context: context, builder: (BuildContext bc) {
-      return Container(
-        height: MediaQuery.of(context).size.height * .60,
-        child: Padding(
-          padding: const EdgeInsets.all(8.0),
-          child: Column(
-            children: <Widget>[
-              Row(
-                children: <Widget>[
-                  Text("Edit Trip"),
-                  Spacer(),
-                  IconButton(
-                    icon: Icon(Icons.cancel, color: Colors.orange, size: 25,),
-                    onPressed: () {
-                      Navigator.of(context).pop();
-                    },
-                  )
 
-                ],
-              ),
-              Row(
-                children: [
-                  Text(
-                    'Bla-bla-bla',
-                    style: TextStyle(fontSize: 30, color: Colors.green[900]),
-                  ),
-                ]
-              )
-            ],
-          ),
-        )
-      );
-    });
-  }
-
-
-*/
-
-
-
-
-
-
-
-
-/* 
-
-  ALERTS
-
-  _showMaterialDialog() {
-    showDialog(
-        context: context,
-        builder: (_) => new AlertDialog(
-              title: new Text("Material Dialog"),
-              content: new Text("Hey! I'm Coflutter!"),
-              actions: <Widget>[
-                FlatButton(
-                  child: Text('Close me!'),
-                  onPressed: () {
-                    Navigator.of(context).pop();
-                  },
-                )
-              ],
-            ));
-  }
-
-  _showCupertinoDialog() {
-    showDialog(
-        context: context,
-        builder: (_) =>  CupertinoAlertDialog(
-              title:  Text("Cupertino Dialog"),
-              content:  Text("Hey! I'm Coflutter!"),
-              actions: <Widget>[
-                FlatButton(
-                  child: Text('Close me!'),
-                  onPressed: () {
-                    Navigator.of(context).pop();
-                  },
-                )
-              ],
-            ));
-  }
-  */
 }

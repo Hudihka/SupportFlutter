@@ -16,15 +16,10 @@ class _PushVCState extends State<PushVC> {
       appBar: AppBar(
         title: Text('Push VC'),
         centerTitle: true,
-        //кастомная кнопка назад
-        // leadingWidth: 75,
-        // leading: _customButtonBack(),
 
         // обычная кнопка назад
         leadingWidth: 110,
         leading: _customButtonBackText(),
-        //кнопки с права
-        actions: _rightButtons(),
       ),
       floatingActionButton: FloatingActionButton(
         onPressed: () {
@@ -33,15 +28,6 @@ class _PushVCState extends State<PushVC> {
         tooltip: 'Increment',
         child: Icon(Icons.add),
       ),
-    );
-  }
-
-  GestureDetector _customButtonBack() {
-    return GestureDetector(
-      onTap: () {
-        Navigator.pop(context);
-      },
-      child: Icon(Icons.arrow_back_ios),
     );
   }
 
@@ -67,25 +53,4 @@ class _PushVCState extends State<PushVC> {
     );
   }
 
-  // Icon(Icons.arrow_back_ios)
-
-  List<Widget> _rightButtons() {
-    return <Widget>[
-      Padding(
-          padding: EdgeInsets.only(right: 20.0),
-          child: GestureDetector(
-            onTap: () {},
-            child: Icon(
-              Icons.search,
-              size: 26.0,
-            ),
-          )),
-      Padding(
-          padding: EdgeInsets.only(right: 20.0),
-          child: GestureDetector(
-            onTap: () {},
-            child: Icon(Icons.more_vert),
-          )),
-    ];
-  }
 }

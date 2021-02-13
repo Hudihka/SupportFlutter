@@ -11,13 +11,7 @@ class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
-      //переход можно задавать еще так
-      //но тогда закоменти home
-      // initialRoute: '/',
-      // routes: {
-      //     '/':(BuildContext context) => StartVC(),
-      //     '/second':(BuildContext context) => PushVC()
-      // },
+
       theme: ThemeData(
         primarySwatch: Colors.blue,
         visualDensity: VisualDensity.adaptivePlatformDensity,
