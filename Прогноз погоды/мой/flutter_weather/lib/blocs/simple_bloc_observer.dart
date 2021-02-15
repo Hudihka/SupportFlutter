@@ -1,5 +1,6 @@
 import 'package:bloc/bloc.dart';
 
+// создаем наблюдателя
 class SimpleBlocObserver extends BlocObserver {
   @override
   void onEvent(Bloc bloc, Object event) {

@@ -5,7 +5,6 @@ import 'package:flutter_weather/modeles/weather.dart';
 import 'package:meta/meta.dart';
 
 import 'package:flutter_weather/repositories/weather_api_client.dart';
-import 'package:flutter_weather/models/models.dart';
 
 class WeatherRepository {
   final WeatherApiClient weatherApiClient;
