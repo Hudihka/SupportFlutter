@@ -4,6 +4,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_weather/blocs/weather_bloc.dart';
 import 'package:flutter_weather/blocs/weather_event.dart';
 import 'package:flutter_weather/blocs/weather_state.dart';
+import 'package:flutter_weather/widgets/city_selection.dart';
 import 'package:flutter_weather/widgets/combined_weather_temperature.dart';
 
 import 'last_updated.dart';

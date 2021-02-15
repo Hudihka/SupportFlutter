@@ -2,7 +2,7 @@ import 'package:flutter_weather/modeles/weather.dart';
 import 'package:meta/meta.dart';
 import 'package:equatable/equatable.dart';
 
-import 'package:flutter_weather/models/models.dart';
+import 'package:flutter_weather/modeles/models.dart';
 
 /*
 
