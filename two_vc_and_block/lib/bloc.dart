@@ -51,6 +51,8 @@ class UserBlock extends Bloc<Events, StateEnum> {
   @override
   Stream<StateEnum> mapEventToState(Events event) async* {//async* работа с потоком
 
+    print('++++++++++');
+
     if (event == Events.pressAdd){
       yield StateEnum.stateAdd;
     } else if (event == Events.pressMinus){

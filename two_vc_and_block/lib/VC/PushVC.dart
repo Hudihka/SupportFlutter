@@ -3,23 +3,13 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:two_vc_and_block/bloc.dart';
 
 
-
-// class PushVC extends StatefulWidget {
-//   PushVC({Key key, this.title}) : super(key: key);
-//   final String title;
-//   @override
-//   _PushVCState createState() => _PushVCState();
-// }
-
-// class _PushVCState extends State<PushVC> {
-
 class PushVC extends StatelessWidget {
+
 
   @override
   Widget build(BuildContext context) {
 
     // final UserBlock userBlock = BlocProvider.of<UserBlock>(context);
-    final UserBlock userBlock = BlocProvider.of(context);
 
     return Scaffold(
       appBar: AppBar(
@@ -28,11 +18,12 @@ class PushVC extends StatelessWidget {
 
         // обычная кнопка назад
         leadingWidth: 110,
-        leading: _customButtonBackText(),
+        // leading: _customButtonBackText(context),
       ),
       floatingActionButton: FloatingActionButton(
         onPressed: () {
-          userBlock.add(Events.pressAdd);
+          BlocProvider.of<UserBlock>(context).add(Events.pressAdd);
+          print('-------');
         },
         tooltip: 'Increment',
         child: Icon(Icons.add),
@@ -41,9 +32,12 @@ class PushVC extends StatelessWidget {
   }
 
   GestureDetector _customButtonBackText({String text}) {
+
+    // BlocProvider.of<UserBlock>(context)
     return GestureDetector(
       onTap: () {
-        Navigator.pop(context);
+        // Navigator.pop(context);
+        // Navigator.pop(context);
       },
       child: Row(children: [
         SizedBox(width: 18),

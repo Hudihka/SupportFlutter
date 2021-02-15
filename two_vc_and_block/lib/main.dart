@@ -1,9 +1,25 @@
 import 'package:flutter/material.dart';
-import 'package:two_vc_and_block/VC/PushVC.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:two_vc_and_block/bloc.dart';
 import 'package:two_vc_and_block/VC/StartVC.dart';
 
 void main() {
-  runApp(MyApp());
+  runApp(
+    MultiBlocProvider(providers: [
+      BlocProvider<UserBlock>(
+        create: (context) => UserBlock(StateEnum.stateNone),
+      ),
+    ],
+    child: MyApp(),
+    )
+  );
+
+
+
+  // runApp(MyApp());
+}
+
+class UserBloc {
 }
 
 class MyApp extends StatelessWidget {
