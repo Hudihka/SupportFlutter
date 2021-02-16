@@ -17,7 +17,7 @@ class PushVC extends StatelessWidget {
 
         // обычная кнопка назад
         leadingWidth: 110,
-        // leading: _customButtonBackText(context),
+        leading: _customButtonBackText(context),
       ),
       floatingActionButton: FloatingActionButton(
         onPressed: () {
@@ -29,12 +29,12 @@ class PushVC extends StatelessWidget {
     );
   }
 
-  GestureDetector _customButtonBackText({String text}) {
+  GestureDetector _customButtonBackText(BuildContext context, {String text}) {
 
     return GestureDetector(
       onTap: () {
-        // Navigator.pop(context);
-        // Navigator.pop(context);
+        // Navigator.of(context);
+        Navigator.pop(context);
       },
       child: Row(children: [
         SizedBox(width: 18),
