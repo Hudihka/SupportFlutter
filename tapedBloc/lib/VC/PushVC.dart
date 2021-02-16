@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:two_vc_and_block/bloc.dart';
 
 
 class PushVC extends StatelessWidget {
@@ -8,8 +7,6 @@ class PushVC extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-
-    // final UserBlock userBlock = BlocProvider.of<UserBlock>(context);
 
     return Scaffold(
       appBar: AppBar(
@@ -22,7 +19,6 @@ class PushVC extends StatelessWidget {
       ),
       floatingActionButton: FloatingActionButton(
         onPressed: () {
-          BlocProvider.of<UserBlock>(context).add(Events.pressAdd);
           print('-------');
         },
         tooltip: 'Increment',

@@ -3,7 +3,6 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:two_vc_and_block/VC/PushVC.dart';
 import 'package:two_vc_and_block/VC/PresentVC.dart';
-import 'package:two_vc_and_block/bloc.dart';
 
 class StartVC extends StatefulWidget {
   StartVC({Key key, this.title}) : super(key: key);
@@ -13,14 +12,12 @@ class StartVC extends StatefulWidget {
 }
 
 class _StartVCState extends State<StartVC> {
-  CounterTextWidget _counterText = CounterTextWidget();
+
+  int _counter = 0;
 
   @override
   Widget build(BuildContext context) {
-    return BlocProvider<UserBlock>(
-      create: (context) => UserBlock(StateEnum.stateNone),
-      child: _startScafold(),
-    );
+    return _startScafold();
   }
 
 
@@ -34,7 +31,10 @@ class _StartVCState extends State<StartVC> {
         child: Column(
           mainAxisAlignment: MainAxisAlignment.center,
           children: <Widget>[
-            _counterText,
+            Text(
+              'Counter count $_counter',
+              style: TextStyle(fontSize: 25, color: Colors.red),
+            ),
             Row(
                 mainAxisAlignment: MainAxisAlignment
                     .spaceEvenly, //весь контент разделен одинак расстоянием
@@ -95,41 +95,4 @@ class _StartVCState extends State<StartVC> {
   }
 
 
-}
-
-class CounterTextWidget extends StatelessWidget {
-
-  int _counter = 0;
-
-  @override
-  Widget build(BuildContext context) {
-    return BlocBuilder<UserBlock, StateEnum>(builder: (context, state) {
-      if (state == StateEnum.stateAdd){
-        _counter++;
-        return Text(
-              'Counter count $_counter',
-              style: TextStyle(fontSize: 25, color: Colors.red),
-            );
-      } 
-      
-      if (state == StateEnum.stateMinus){
-
-        if (_counter > 0) {
-          _counter--;
-        }
-
-        return Text(
-              'Counter count $_counter',
-              style: TextStyle(fontSize: 25, color: Colors.red),
-            );
-      }
-
-      return Text(
-              'Counter count $_counter',
-              style: TextStyle(fontSize: 25, color: Colors.red),
-            );
-
-
-    });
-  }
 }
