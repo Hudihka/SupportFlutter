@@ -47,7 +47,7 @@ class _StartVCState extends State<StartVC> {
                     MainAxisAlignment.center, //весь контент собран по центру
                 children: <Widget>[
                   _presentVC(),
-                  Text('Пресент ВК и -- к счетчику')
+                  Text('Пресент ВК и -2 к счетчику')
                 ]),
           ],
         ),
@@ -61,9 +61,13 @@ class _StartVCState extends State<StartVC> {
   FlatButton _pushVC() {
     return FlatButton(
         onPressed: () {
+          PushVC pushVC = PushVC(tapedPlus:(){
+            setState(() { _counter++; });
+          });
+
           Navigator.push(
             context,
-            MaterialPageRoute(builder: (context) => PushVC()),
+            MaterialPageRoute(builder: (context) => pushVC),
           );
         },
         textColor: Colors.red,
@@ -73,14 +77,21 @@ class _StartVCState extends State<StartVC> {
         ));
   }
 
+
   FlatButton _presentVC() {
     return FlatButton(
       onPressed: () {
-        // presentVC
+
+        PresentVC presentVC = PresentVC(deleteTwo: (int count){
+          setState(() { 
+            _counter = _counter - 2; 
+            });
+        },);
+
         Navigator.of(context).push(
           CupertinoPageRoute(
               fullscreenDialog: true,
-              builder: (context) => PresentVC(),
+              builder: (context) => presentVC,
               settings: RouteSettings()),
         );
       },
@@ -89,10 +100,11 @@ class _StartVCState extends State<StartVC> {
       color: Colors.blue,
       textColor: Colors.red,
       child: Text(
-        "--",
+        "-2",
       ),
     );
   }
 
 
 }
+

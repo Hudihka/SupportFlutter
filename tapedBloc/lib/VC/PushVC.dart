@@ -4,10 +4,12 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 
 class PushVC extends StatelessWidget {
 
+  Function() tapedPlus;
+
+   PushVC({@required this.tapedPlus});
 
   @override
   Widget build(BuildContext context) {
-
     return Scaffold(
       appBar: AppBar(
         title: Text('Push VC'),
@@ -19,7 +21,7 @@ class PushVC extends StatelessWidget {
       ),
       floatingActionButton: FloatingActionButton(
         onPressed: () {
-          print('-------');
+          tapedPlus();
         },
         tooltip: 'Increment',
         child: Icon(Icons.add),
@@ -29,7 +31,6 @@ class PushVC extends StatelessWidget {
 
   GestureDetector _customButtonBackText({String text}) {
 
-    // BlocProvider.of<UserBlock>(context)
     return GestureDetector(
       onTap: () {
         // Navigator.pop(context);
