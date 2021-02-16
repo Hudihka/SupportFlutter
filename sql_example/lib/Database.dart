@@ -1,6 +1,4 @@
 
-
-
 import 'dart:io';
 import 'package:path_provider/path_provider.dart';
 import 'package:sqflite/sqflite.dart';
@@ -139,5 +137,7 @@ deleteClient(int id) async {
     final db = await database;
     db.rawDelete("Delete * from Client");
   }
+
+  void blockClient(Client item) {}
 
 }
