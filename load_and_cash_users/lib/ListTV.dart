@@ -16,13 +16,13 @@ class _ListTVState extends State<ListTV> {
   List<Client> _dataArray = [];
 
   final ClientProvider _request = ClientProvider();
-  var _loadStatus = true;
+  var _loadStatus = false;
   final _dataBase = DBProvider.db;
 
   @override
   void initState() {
     super.initState();
-    _request.getUser();
+    _loadUsers();
   }
 
   @override
@@ -67,10 +67,16 @@ class _ListTVState extends State<ListTV> {
   }
 
   Future<void> _getData() async {
+    _loadUsers();
+  }
+
+  _loadUsers() async {
     if (_loadStatus == false){
       _loadStatus = true;
+      await _request.getUser();
+
     setState(() {
-      _request.getUser();
+       _loadStatus = false;
     });
     }
   }

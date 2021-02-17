@@ -8,7 +8,7 @@ import 'package:sqflite/sqlite_api.dart';
 
 class ClientProvider {
 
-  getUser() async {
+  Future getUser() async {
 
     final response = await http.get('https://jsonplaceholder.typicode.com/users');
 
