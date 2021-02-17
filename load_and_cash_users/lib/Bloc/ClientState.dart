@@ -1,4 +1,6 @@
+import 'dart:html';
 import 'package:flutter/material.dart';
+import 'package:load_and_cash_users/Models/Client.dart';
 
 abstract class ClientState {}
 
@@ -9,11 +11,15 @@ class ClientEmptyState extends ClientState {}
 class ClientLoadState extends ClientState {}
 
 //список узеры загружены
-class UserLoadedState extends ClientState {
-  List<dynamic> loadedUser;
+class ClientLoadedState extends ClientState {
+  List<dynamic> loadedClient;
   //@required обязателен для передачи
   // assert это обяз условие без которого не начнетсы выполнение
-  UserLoadedState({@required this.loadedUser}) : assert(loadedUser != null);
+  ClientLoadedState({@required this.loadedClient}) : assert(loadedClient != null);
+
+  List<Client> get loadedUser {
+    return loadedClient as List<Client>;
+  }
 }
 
 //когда произошла ошибка при загрузке
