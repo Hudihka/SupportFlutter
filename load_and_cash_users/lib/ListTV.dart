@@ -39,7 +39,7 @@ class _ListTVState extends State<ListTV> {
     return FutureBuilder(
       future: _dataBase.getAllClients(),
       builder: (BuildContext context, AsyncSnapshot snapshot) {
-        _loadStatus = true;
+        _loadStatus = false;
 
         if (!snapshot.hasData) {
           return Center(

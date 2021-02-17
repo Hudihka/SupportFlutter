@@ -61,7 +61,17 @@ class DBProvider {
 
     final db = await database;
     clients.forEach((element) async {
-      await db.insert("Client", element.toMap);
+      final id = element.id;
+      final clients = await db.query("Client", where: "id = ?", whereArgs: [id]);
+      final jsonClient = element.toMap;
+
+      //если такого клиента нет, то создаем нового
+      if (clients.isEmpty){
+        await db.insert("Client", jsonClient);
+      } else {
+        await db.update("Client", jsonClient, where: "id = ?", whereArgs: [id]);
+      }
+
     });
 
     return clients;
