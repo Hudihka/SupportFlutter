@@ -48,6 +48,33 @@ class DBProvider {
     return res;
   }
 
+  newClients(List<Client> newClients) async {
+    final db = await database;
+    newClients.forEach((element) async { 
+      await db.insert("Client", element.toMap);
+    });
+  }
+
+  newClientFromJson(Map<String, dynamic> json) async {
+    final db = await database;
+    var res = await db.insert("Client", json);
+    return res;
+  }
+
+  newClientsFromJson(List<Map<String, dynamic>> jsons) async {
+
+    List<Client> clients = jsons.map((json) => Client.fromMap(json)).toList();
+
+    final db = await database;
+    clients.forEach((element) async { 
+      await db.insert("Client", element.toMap);
+    });
+
+    return clients;
+  }
+
+  
+
   //использование самого большого id для нового клиента
   // newClient3(Client newClient) async {
   //   final db = await database;

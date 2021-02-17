@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:load_and_cash_users/Models/Client.dart';
 
 class ListTV extends StatefulWidget {
   @override
@@ -8,7 +9,7 @@ class ListTV extends StatefulWidget {
 }
 
 class _ListTVState extends State<ListTV> {
-  // List<DataTV> _data = [];
+  List<Client> _data = [];
 
   @override
   Widget build(BuildContext context) {
@@ -18,45 +19,31 @@ class _ListTVState extends State<ListTV> {
       ),
       body: Container(
 
-        // child: ListView.builder( //это динамически меняющ таблица те если много ячеек
-        //   itemCount: _data.length,
-        //   itemBuilder: (BuildContext context, int position) {
-        //     return _cellForIndex(position);
-        //   }),
+        child: ListView.builder( //это динамически меняющ таблица те если много ячеек
+          itemCount: _data.length,
+          itemBuilder: (BuildContext context, int position) {
+            return _cellForIndex(position);
+          }),
       ),
     );
   }
 
-  // Widget _cellForIndex(int index){ //ячейка по индексу
-  //   // DataTV obj = _data[index];
-  //   return Ink(
-  //           color: Colors.grey[50], //выделение ячейки
-  //           child: ListTile(
-  //             subtitle: Text(obj.username),
-  //             title: Text(obj.name),
-  //             leading: CircleAvatar(
-  //               child: Text(obj.id.toString()),
-  //             ),
-  //             trailing: Text(obj.email),
+  Widget _cellForIndex(int index){ //ячейка по индексу
+    Client obj = _data[index];
 
-  //             onTap: (){
-  //               print('-------------------------');
-  //             },
-  //           ),
-  //         );
-  // }
-
-  // void _loadCC() async {
-  //   //await значит выполняется на другом потоке
-  //   final response =
-  //       await http.get('https://jsonplaceholder.typicode.com/users');
-  //   if (response.statusCode == 200) {
-  //     var tagObjsJson = jsonDecode(response.body) as List;
-  //     List<DataTV> datasObjs =
-  //         tagObjsJson.map((tagJson) => DataTV.fromJson(tagJson)).toList();
-  //     _data = datasObjs;
-  //     setState(() {}); //по сути релоад дата
-
-  //   }
-  // }
+    return Ink(
+            color: Colors.grey[50], //выделение ячейки
+            child: ListTile(
+              subtitle: Text(obj.username),
+              title: Text(obj.name),
+              leading: CircleAvatar(
+                child: Text(obj.id.toString()),
+              ),
+              trailing: Text(obj.email),
+              onTap: (){
+                print('-------------------------');
+              },
+            ),
+          );
+  }
 }
