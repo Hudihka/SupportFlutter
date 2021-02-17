@@ -1,10 +1,8 @@
-
 import 'dart:io';
 import 'package:load_and_cash_users/Models/Client.dart';
 import 'package:path_provider/path_provider.dart';
 import 'package:sqflite/sqflite.dart';
 import 'package:path/path.dart';
-
 
 class DBProvider {
   /*
@@ -14,11 +12,10 @@ class DBProvider {
   DBProvider._();
   static final DBProvider db = DBProvider._();
 
-
   static Database _database;
 
   Future<Database> get database async {
-    if (_database != null){
+    if (_database != null) {
       return _database;
     }
 
@@ -30,8 +27,8 @@ class DBProvider {
   initDB() async {
     Directory documentsDirectory = await getApplicationDocumentsDirectory();
     String path = join(documentsDirectory.path, "TestDB.db"); //имя базы данных
-    return await openDatabase(path, version: 1, onOpen: (db) {
-    }, onCreate: (Database db, int version) async {
+    return await openDatabase(path, version: 1, onOpen: (db) {},
+        onCreate: (Database db, int version) async {
       await db.execute("CREATE TABLE Client (" //модель клиент и ее поля
           "id INTEGER PRIMARY KEY,"
           "name TEXT,"
@@ -41,7 +38,6 @@ class DBProvider {
     });
   }
 
-
   newClient(Client newClient) async {
     final db = await database;
     var res = await db.insert("Client", newClient.toMap);
@@ -50,7 +46,7 @@ class DBProvider {
 
   newClients(List<Client> newClients) async {
     final db = await database;
-    newClients.forEach((element) async { 
+    newClients.forEach((element) async {
       await db.insert("Client", element.toMap);
     });
   }
@@ -62,18 +58,15 @@ class DBProvider {
   }
 
   newClientsFromJson(List<Map<String, dynamic>> jsons) async {
-
     List<Client> clients = jsons.map((json) => Client.fromMap(json)).toList();
 
     final db = await database;
-    clients.forEach((element) async { 
+    clients.forEach((element) async {
       await db.insert("Client", element.toMap);
     });
 
     return clients;
   }
-
-  
 
   //использование самого большого id для нового клиента
   // newClient3(Client newClient) async {
@@ -81,7 +74,7 @@ class DBProvider {
   //   //get the biggest id in the table
   //   var table = await db.rawQuery("SELECT MAX(id)+1 as id FROM Client");
   //   int id = table.first["id"];
-  //   //insert to the table using the new id 
+  //   //insert to the table using the new id
   //   var raw = await db.rawInsert(
   //       "INSERT Into Client (id,first_name,last_name,blocked)"
   //       " VALUES (?,?,?,?)",
@@ -92,8 +85,8 @@ class DBProvider {
   //получение клиента по id
   getClient(int id) async {
     final db = await database;
-    var res =await  db.query("Client", where: "id = ?", whereArgs: [id]);
-    return res.isNotEmpty ? Client.fromMap(res.first) : Null ;
+    var res = await db.query("Client", where: "id = ?", whereArgs: [id]);
+    return res.isNotEmpty ? Client.fromMap(res.first) : Null;
   }
 
   //получение всех клиентов
@@ -115,7 +108,6 @@ class DBProvider {
         res.isNotEmpty ? res.toList().map((c) => Client.fromMap(c)) : null;
     return list;
   }
-
 
   //Обновить существующего клиента
 
@@ -143,8 +135,7 @@ class DBProvider {
 
   //удалить клиента
 
-
-deleteClient(int id) async {
+  deleteClient(int id) async {
     final db = await database;
     db.delete("Client", where: "id = ?", whereArgs: [id]);
   }
@@ -155,5 +146,4 @@ deleteClient(int id) async {
     final db = await database;
     db.rawDelete("Delete * from Client");
   }
-
 }
