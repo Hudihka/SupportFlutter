@@ -28,15 +28,15 @@ class UserList extends StatefulWidget {
 }
 
 class _UserListState extends State<UserList> {
-  final String apiUrl = "https://randomuser.me/api/?results=10";
 
   List<dynamic> _users = [];
 
   void fetchUsers() async {
-    var result = await http.get(apiUrl);
-    setState(() {
-      _users = json.decode(result.body)['results'];
-    });
+    // final String apiUrl = "https://randomuser.me/api/?results=10";
+    // var result = await http.get(apiUrl);
+    // setState(() {
+    //   _users = json.decode(result.body)['results'];
+    // });
   }
 
   String _name(dynamic user) {
@@ -62,25 +62,29 @@ class _UserListState extends State<UserList> {
                 padding: EdgeInsets.all(8),
                 itemCount: _users.length,
                 itemBuilder: (BuildContext context, int index) {
-                  return Card(
-                    child: Column(
-                      children: <Widget>[
-                        ListTile(
-                          leading: CircleAvatar(
-                              radius: 30,
-                              backgroundImage: NetworkImage(
-                                  _users[index]['picture']['large'])),
-                          title: Text(_name(_users[index])),
-                          subtitle: Text(_location(_users[index])),
-                          trailing: Text(_age(_users[index])),
-                        )
-                      ],
-                    ),
-                  );
+                  return _cellForIndex(index);
                 }),
             onRefresh: _getData,
           )
         : Center(child: CircularProgressIndicator());
+  }
+
+  Card _cellForIndex(int index) {
+    final user = _users[index];
+    return Card(
+      child: Column(
+        children: <Widget>[
+          ListTile(
+            leading: CircleAvatar(
+                radius: 30,
+                backgroundImage: NetworkImage(user['picture']['large'])),
+            title: Text(_name(user)),
+            subtitle: Text(_location(user)),
+            trailing: Text(_age(user)),
+          )
+        ],
+      ),
+    );
   }
 
   Future<void> _getData() async {

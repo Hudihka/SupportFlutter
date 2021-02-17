@@ -57,8 +57,7 @@ class DBProvider {
     return res;
   }
 
-  newClientsFromJson(List<Map<String, dynamic>> jsons) async {
-    List<Client> clients = jsons.map((json) => Client.fromMap(json)).toList();
+  newClientsList(List<Client> clients) async {
 
     final db = await database;
     clients.forEach((element) async {
@@ -86,7 +85,7 @@ class DBProvider {
   getClient(int id) async {
     final db = await database;
     var res = await db.query("Client", where: "id = ?", whereArgs: [id]);
-    return res.isNotEmpty ? Client.fromMap(res.first) : Null;
+    return res.isNotEmpty ? Client.fromJson(res.first) : Null;
   }
 
   //получение всех клиентов
@@ -95,7 +94,7 @@ class DBProvider {
     final db = await database;
     var res = await db.query("Client");
     List<Client> list =
-        res.isNotEmpty ? res.map((c) => Client.fromMap(c)).toList() : [];
+        res.isNotEmpty ? res.map((c) => Client.fromJson(c)).toList() : [];
     return list;
   }
 
@@ -105,7 +104,7 @@ class DBProvider {
     final db = await database;
     var res = await db.rawQuery("SELECT * FROM Client WHERE blocked=1");
     List<Client> list =
-        res.isNotEmpty ? res.toList().map((c) => Client.fromMap(c)) : null;
+        res.isNotEmpty ? res.toList().map((c) => Client.fromJson(c)) : null;
     return list;
   }
 

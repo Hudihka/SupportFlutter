@@ -8,17 +8,16 @@ import 'package:sqflite/sqlite_api.dart';
 
 class ClientProvider {
 
-  // Future значит обещание, 
-  // Future <>
-
   getUser() async {
-  //final значет не будет изменен другими классами
-  //await применяем при async работе
+
     final response = await http.get('https://jsonplaceholder.typicode.com/users');
 
     if (response.statusCode == 200){
+      print("-----------------");
       final List<dynamic> userJson = json.decode(response.body);
-      DBProvider.db.newClientsFromJson(userJson);
+      final List<Client> clients = userJson.map((json) => Client.fromJson(json)).toList();
+
+      DBProvider.db.newClientsList(clients);
     } else {
       throw Exception('---------ERROR---------');
     }

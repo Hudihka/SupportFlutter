@@ -14,7 +14,7 @@ class Client {
 
   Client({@required this.id, this.name, this.username, this.email}) : assert(id != null);
 
-  factory Client.fromMap(Map<String, dynamic> json) {
+  factory Client.fromJson(Map<String, dynamic> json) {
       return Client(id: json['id'], name: json['name'], username: json['username'], email: json['email']);
   }
 

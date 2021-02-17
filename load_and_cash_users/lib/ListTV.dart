@@ -1,10 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:load_and_cash_users/API/API.dart';
-import 'package:load_and_cash_users/Bloc/ClientCubit.dart';
+import 'package:load_and_cash_users/Data/DBProvider.dart';
 import 'package:load_and_cash_users/Models/Client.dart';
 
-import 'Bloc/ClientState.dart';
 
 class ListTV extends StatefulWidget {
   @override
@@ -16,67 +15,64 @@ class ListTV extends StatefulWidget {
 class _ListTVState extends State<ListTV> {
   List<Client> _dataArray = [];
 
+  final ClientProvider _request = ClientProvider();
+  var _loadStatus = true;
+  final _dataBase = DBProvider.db;
+
+  @override
+  void initState() {
+    super.initState();
+    _request.getUser();
+  }
+
   @override
   Widget build(BuildContext context) {
-    return BlocProvider<ClientCubit>(
-      create: (context) => ClientCubit(ClientStarted()),
-      child: Scaffold(
+    return Scaffold(
         appBar: AppBar(
           title: Text('TV Application'),
         ),
-        body: Container(
-          child: _table(),
-        ),
-      ),
+        body: _buildEmployeeListView(),
+      );
+  }
+
+  _buildEmployeeListView() {
+    return FutureBuilder(
+      future: _dataBase.getAllClients(),
+      builder: (BuildContext context, AsyncSnapshot snapshot) {
+        _loadStatus = true;
+
+        if (!snapshot.hasData) {
+          return Center(
+            child: CircularProgressIndicator(),
+          );
+        } else {
+          return _crerateList(snapshot.data as List<Client>);
+        }
+      },
     );
   }
 
-  Widget _table(){
 
-    return BlocBuilder<ClientCubit, ClientState>(
-              builder: (context, state) {
+  RefreshIndicator _crerateList(List<Client> dataArray){
+        _dataArray = dataArray;
 
-      if (state is ClientStarted){
-        final bloc = context.read() as ClientCubit;
-        
-        print('-------------------------');
-        // bloc.casheClient();
-        // bloc.fetchClient();
-
-        return Center(
-          child: Text(
-            'грузим', 
-            style: TextStyle(fontSize: 20)
-            ),
-        );
-
-      } else if (state is ClientGetFromCashe) {
-        return _crerateList(state.casheClient);
-      } else if (state is ClientLoadState) {
-
-        return Center(
-          child: CircularProgressIndicator(),
-        );
-
-      } else { //ошибка
-        return Center(
-          child: Text(
-            'Error fetching users', 
-            style: TextStyle(fontSize: 20)
-            ),
-        );
-      }       
-    });
-  }
-
-  ListView _crerateList(List<Client> dataArray){
-            _dataArray = dataArray;
-
-        return ListView.builder(
+        return RefreshIndicator(
+          onRefresh: _getData,
+          child: ListView.builder(
               itemCount: _dataArray.length,
               itemBuilder: (BuildContext context, int position) {
                 return _cellForIndex(position);
-        });
+        }),
+        );
+  }
+
+  Future<void> _getData() async {
+    if (_loadStatus == false){
+      _loadStatus = true;
+    setState(() {
+      _request.getUser();
+    });
+    }
   }
 
 
