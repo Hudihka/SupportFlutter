@@ -98,7 +98,7 @@ class DBProvider {
 
   //получение всех клиентов
 
-  getAllClients() async {
+  Future<List<Client>> getAllClients() async {
     final db = await database;
     var res = await db.query("Client");
     List<Client> list =

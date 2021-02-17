@@ -14,13 +14,12 @@ class ListTV extends StatefulWidget {
 }
 
 class _ListTVState extends State<ListTV> {
-  final usersRepository = ClientProvider();
   List<Client> _dataArray = [];
 
   @override
   Widget build(BuildContext context) {
     return BlocProvider<ClientCubit>(
-      create: (context) => ClientCubit(usersRepository),
+      create: (context) => ClientCubit(ClientStarted()),
       child: Scaffold(
         appBar: AppBar(
           title: Text('TV Application'),
@@ -33,30 +32,31 @@ class _ListTVState extends State<ListTV> {
   }
 
   Widget _table(){
+
     return BlocBuilder<ClientCubit, ClientState>(
               builder: (context, state) {
 
-      if (state is ClientEmptyState) {
+      if (state is ClientStarted){
+        final bloc = context.read() as ClientCubit;
+        
+        print('-------------------------');
+        // bloc.casheClient();
+        // bloc.fetchClient();
+
         return Center(
           child: Text(
-            'No data received. Press Button load',
-            style: TextStyle(fontSize: 20),
-          ),
+            'грузим', 
+            style: TextStyle(fontSize: 20)
+            ),
         );
+
+      } else if (state is ClientGetFromCashe) {
+        return _crerateList(state.casheClient);
       } else if (state is ClientLoadState) {
 
         return Center(
           child: CircularProgressIndicator(),
         );
-
-      } else if (state is ClientLoadedState) {
-        _dataArray = state.loadedUser;
-
-        return ListView.builder(
-              itemCount: _dataArray.length,
-              itemBuilder: (BuildContext context, int position) {
-                return _cellForIndex(position);
-        });
 
       } else { //ошибка
         return Center(
@@ -67,6 +67,16 @@ class _ListTVState extends State<ListTV> {
         );
       }       
     });
+  }
+
+  ListView _crerateList(List<Client> dataArray){
+            _dataArray = dataArray;
+
+        return ListView.builder(
+              itemCount: _dataArray.length,
+              itemBuilder: (BuildContext context, int position) {
+                return _cellForIndex(position);
+        });
   }
 
 
