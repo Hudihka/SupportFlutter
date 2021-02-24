@@ -18,7 +18,7 @@ class UserProvider {
       final List<dynamic> userJson = json.decode(response.body);
       final List<User> clients = userJson.map((json) => User.fromJson(json)).toList();
 
-      DBProvider.db.newUsersList(clients);
+      await DBProvider.db.newUsersList(clients);
     } else {
       throw Exception('---------ERROR---------');
     }

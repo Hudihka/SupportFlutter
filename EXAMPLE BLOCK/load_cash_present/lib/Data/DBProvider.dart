@@ -52,10 +52,12 @@ class DBProvider {
   // }
 
 
-  newUsersList(List<User> users) async {
+  Future<void> newUsersList(List<User> users) async {
 
     final db = await database;
-    users.forEach((element) async {
+    await Future.wait(
+
+      users.map((element) async {
       final id = element.id;
       final users = await db.query("User", where: "id = ?", whereArgs: [id]);
       final jsonUser = element.toMap;
@@ -67,9 +69,10 @@ class DBProvider {
         await db.update("User", jsonUser, where: "id = ?", whereArgs: [id]);
       }
 
-    });
+    }));
 
-    return users;
+    ///ДОБАВИТЬ УДАЛЕНИЕ ТОГО, ЧТО НЕ ПРИШЛО
+
   }
 
   //использование самого большого id для нового клиента
