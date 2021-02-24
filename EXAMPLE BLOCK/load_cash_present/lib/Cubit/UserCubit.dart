@@ -4,7 +4,9 @@ import 'package:load_cash_present/Models/User.dart';
 import 'package:load_cash_present/Repository/UsersRepository.dart';
 
 
-abstract class UserState {}
+abstract class UserState {
+
+}
 
 //список пустой
 class UserEmptyState extends UserState {}
@@ -45,9 +47,16 @@ class UserCubit extends Cubit<UserState>{
     }
   }
 
-  Future<void> clearUser() async {
-    emit(UserEmptyState());
+  Future<void> reloadUser() async {
+    try {
+      final List<User> _loadedUserList = await usersRepository.getAllUsers();
+      emit(UserLoadedState(loadedUser: _loadedUserList));
+    } catch(_) {
+      emit(UserEmptyState());
+    }
   }
+
+
 }
 
 
