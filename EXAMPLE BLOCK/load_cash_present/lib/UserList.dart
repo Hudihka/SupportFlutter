@@ -13,7 +13,7 @@ class UserList extends StatelessWidget {
       if (state is UserEmptyState) {
         return Center(
           child: Text(
-            'No data received. Press Button load',
+            'No data received.',
             style: TextStyle(fontSize: 20),
           ),
         );
@@ -58,10 +58,7 @@ class UserList extends StatelessWidget {
             ),
           ),
         );
-      }
-
-
-      if (state is UserErrorState) {
+      } else {////state is UserErrorState
         return Center(
           child: Text(
             'Error fetching users', 
@@ -69,8 +66,6 @@ class UserList extends StatelessWidget {
             ),
         );
       }
-
-      return null; //лучше так не делать
 
     });
   }
