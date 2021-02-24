@@ -1,58 +1,61 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:load_cash_present/API/UserProvider.dart';
+import 'package:load_cash_present/Data/DBProvider.dart';
 import 'package:load_cash_present/Models/User.dart';
-import 'package:load_cash_present/Repository/UsersRepository.dart';
 
+class UserState {
+  final bool loadStatus;
+  final List<User> listUsers;
 
-abstract class UserState {
+  UserState({this.loadStatus, this.listUsers});
 
+  UserState copyWith({bool loadStatus, List<User> listUsers}){
+
+    return UserState(loadStatus: loadStatus ?? this.loadStatus,
+                     listUsers: listUsers ?? this.listUsers);
+
+  }
+  
 }
-
-//список пустой
-class UserEmptyState extends UserState {}
-
-//список загрузки
-class UserLoadState extends UserState {}
-
-//список узеры загружены
-class UserLoadedState extends UserState {
-  List<dynamic> loadedUser;
-  //@required обязателен для передачи
-  // assert это обяз условие без которого не начнетсы выполнение
-  UserLoadedState({@required this.loadedUser}) : assert(loadedUser != null);
-}
-
-//когда произошла ошибка при загрузке
-class UserErrorState extends UserState {}
 
 
 class UserCubit extends Cubit<UserState>{
-  final UsersRepository usersRepository;
-  UserCubit(this.usersRepository) : super(UserEmptyState());
+  
+  UserProvider _userProvider = UserProvider();
+  List<User> _listUser = [];
+  final DBProvider _cash = DBProvider.db;
 
-//   async дает вам Future
-// async* дает вам Stream.
-// при async* есть yield
+  final UserState userState;
+  UserCubit(this.userState) : super(UserState());
 
   Future<void> fetchUser() async {
-    emit(UserEmptyState());
+    //показываем в начале пустой экран
+    emit(userState.copyWith(listUsers: _listUser, loadStatus: true));
+
+    //грузим юзеров из памяти
+    _listUser = await _cash.getAllUsers();
+    emit(userState.copyWith(listUsers: _listUser, loadStatus: true));
+
     try {
-      emit(UserLoadState());
-      //await позволяет дождаться выполнения асинхронной функции 
-      //и после обработать результат, если он есть.
-      final List<User> _loadedUserList = await usersRepository.getAllUsers();
-      emit(UserLoadedState(loadedUser: _loadedUserList));
+      // загружаем юзеров и показываем уже из памяти
+
+      await _userProvider.getUser();
+      _listUser = await _cash.getAllUsers();
+      emit(userState.copyWith(listUsers: _listUser, loadStatus: false));
+
     } catch(_) {
-      emit(UserEmptyState());
+      emit(userState.copyWith(listUsers: _listUser, loadStatus: false));
     }
   }
 
   Future<void> reloadUser() async {
     try {
-      final List<User> _loadedUserList = await usersRepository.getAllUsers();
-      emit(UserLoadedState(loadedUser: _loadedUserList));
+      await _userProvider.getUser();
+      _listUser = await _cash.getAllUsers();
+      emit(userState.copyWith(listUsers: _listUser, loadStatus: false));
     } catch(_) {
-      emit(UserEmptyState());
+      emit(userState.copyWith(listUsers: _listUser, loadStatus: false));
     }
   }
 

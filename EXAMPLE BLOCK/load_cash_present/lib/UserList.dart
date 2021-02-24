@@ -6,8 +6,6 @@ import 'Models/User.dart';
 
 
 class UserList extends StatelessWidget {
-  List<User> _dataArray;
-  bool _loadStatus = true;
 
   @override
   Widget build(BuildContext context) {
@@ -16,55 +14,79 @@ class UserList extends StatelessWidget {
     userCubit.fetchUser();
 
     return BlocBuilder<UserCubit, UserState>(builder: (context, state) {
+      if (state is UserState){
+        List<User> _dataArray = state.listUsers;
+        bool _loadStatus = state.loadStatus;
 
-      if (state is UserEmptyState) {
+        if (_dataArray.isEmpty)  {
+          return Center(child: _loadStatus ? CircularProgressIndicator() : 
+                                             Text('На бэке пусто', style: TextStyle(fontSize: 20)
+                  ));
+        } else {
 
-
-
-        return Center(
-          child: Text(
-            'No data received.',
-            style: TextStyle(fontSize: 20),
-          ),
-        );
-      }
-
-      if (state is UserLoadState) {
-        return Center(
-          child: CircularProgressIndicator(),
-        );
-      }
-
-      _loadStatus = false;
-
-      if (state is UserLoadedState) {
-        _dataArray = state.loadedUser;
-
-        return RefreshIndicator(
+          return RefreshIndicator(
             child: ListView.builder(
                 itemCount: _dataArray.length,
                 itemBuilder: (context, index) {
-                  return _cellForIndex(index);
+                  User obj = _dataArray[index];
+                  return _cellForIndex(obj);
                 }),
             onRefresh: (){
-              return _refresh(context);
+              return _refresh(context, _loadStatus);
             },
           );
+        }
 
 
-      } else {
-        ////state is UserErrorState
-        
-        return Center(
-          child: Text('Error fetching users', style: TextStyle(fontSize: 20)),
-        );
       }
+
+
+      // if (state is UserEmptyState) {
+      //   return Center(
+      //     child: Text(
+      //       'No data received.',
+      //       style: TextStyle(fontSize: 20),
+      //     ),
+      //   );
+      // }
+
+      // if (state is UserLoadState) {
+      //   return Center(
+      //     child: CircularProgressIndicator(),
+      //   );
+      // }
+
+      // _loadStatus = false;
+
+      // if (state is UserLoadedState) {
+      //   _dataArray = state.loadedUser;
+
+      //   return RefreshIndicator(
+      //       child: ListView.builder(
+      //           itemCount: _dataArray.length,
+      //           itemBuilder: (context, index) {
+      //             return _cellForIndex(index);
+      //           }),
+      //       onRefresh: (){
+      //         return _refresh(context);
+      //       },
+      //     );
+
+
+      // } else {
+      //   ////state is UserErrorState
+        
+      //   return Center(
+      //     child: Text('Error fetching users', style: TextStyle(fontSize: 20)),
+      //   );
+      // }
+
+
     });
   }
 
-  Widget _cellForIndex(int index) {
+  Widget _cellForIndex(User obj) {
     //ячейка по индексу
-    User obj = _dataArray[index];
 
     return Ink(
       color: Colors.grey[50], //выделение ячейки
@@ -82,9 +104,8 @@ class UserList extends StatelessWidget {
     );
   }
 
-  Future<void> _refresh(BuildContext context) async {
-    if (_loadStatus == false) {
-      _loadStatus = true;
+  Future<void> _refresh(BuildContext context, bool loadStatus) async {
+    if (loadStatus == false) {
       //идем в верх по дереву виджетов пока не дойдем до блока
       final UserCubit userCubit = context.read();
       userCubit.reloadUser();
