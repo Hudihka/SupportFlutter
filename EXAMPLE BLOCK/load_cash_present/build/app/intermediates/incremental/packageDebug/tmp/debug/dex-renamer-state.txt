@@ -1,0 +1,4 @@
+#Wed Feb 24 21:33:41 NOVT 2021
+base.0=/Users/admin1/Desktop/SupportFlutter/EXAMPLE BLOCK/load_cash_present/build/app/intermediates/dex/debug/mergeDexDebug/out/classes.dex
+path.0=classes.dex
+renamed.0=classes.dex
