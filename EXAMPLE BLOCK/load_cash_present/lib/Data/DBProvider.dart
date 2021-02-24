@@ -38,24 +38,19 @@ class DBProvider {
     });
   }
 
-  newUser(User newUser) async {
-    final db = await database;
-    var res = await db.insert("User", newUser.toMap);
-    return res;
-  }
+  // newUser(User newUser) async {
+  //   final db = await database;
+  //   var res = await db.insert("User", newUser.toMap);
+  //   return res;
+  // }
 
-  newUsers(List<User> newUsers) async {
-    final db = await database;
-    newUsers.forEach((element) async {
-      await db.insert("User", element.toMap);
-    });
-  }
+  // newUsers(List<User> newUsers) async {
+  //   final db = await database;
+  //   newUsers.forEach((element) async {
+  //     await db.insert("User", element.toMap);
+  //   });
+  // }
 
-  newUserFromJson(Map<String, dynamic> json) async {
-    final db = await database;
-    var res = await db.insert("User", json);
-    return res;
-  }
 
   newUsersList(List<User> users) async {
 
