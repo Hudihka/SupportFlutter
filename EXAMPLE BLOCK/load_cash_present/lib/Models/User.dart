@@ -1,11 +1,13 @@
 
+import 'package:flutter/material.dart';
+
 class User{
   int id;
   String name;
-  String email;
   String phone;
+  String email;
 
-  User({this.id, this.name, this.email, this.phone});
+  User({@required this.id, this.name, this.email, this.phone}) : assert(id != null);
 
   factory User.fromJson(Map<String, dynamic> json) {
     return User(
@@ -14,5 +16,12 @@ class User{
       email: json['email'],
       phone: json['phone']
     );
+  }
+
+  Map<String, dynamic> get toMap{
+    return {"id": id,
+    "name": name,
+    "phone": phone,
+    "email": email};
   }
 }
