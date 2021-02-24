@@ -40,48 +40,6 @@ class UserList extends StatelessWidget {
 
       }
 
-
-      // if (state is UserEmptyState) {
-      //   return Center(
-      //     child: Text(
-      //       'No data received.',
-      //       style: TextStyle(fontSize: 20),
-      //     ),
-      //   );
-      // }
-
-      // if (state is UserLoadState) {
-      //   return Center(
-      //     child: CircularProgressIndicator(),
-      //   );
-      // }
-
-      // _loadStatus = false;
-
-      // if (state is UserLoadedState) {
-      //   _dataArray = state.loadedUser;
-
-      //   return RefreshIndicator(
-      //       child: ListView.builder(
-      //           itemCount: _dataArray.length,
-      //           itemBuilder: (context, index) {
-      //             return _cellForIndex(index);
-      //           }),
-      //       onRefresh: (){
-      //         return _refresh(context);
-      //       },
-      //     );
-
-
-      // } else {
-      //   ////state is UserErrorState
-        
-      //   return Center(
-      //     child: Text('Error fetching users', style: TextStyle(fontSize: 20)),
-      //   );
-      // }
-
-
     });
   }
 
