@@ -7,6 +7,11 @@ import 'Cubit/UserCubit.dart';
 class UserList extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
+
+    //говорит о том, что грузим юзеров при запуске
+    final UserCubit userCubit = context.read();
+    userCubit.fetchUser();
+
     return BlocBuilder<UserCubit, UserState>(
       builder: (context, state) {
         

@@ -50,6 +50,4 @@ class UserCubit extends Cubit<UserState>{
   }
 }
 
-class UserLoadingState {
-}
 
